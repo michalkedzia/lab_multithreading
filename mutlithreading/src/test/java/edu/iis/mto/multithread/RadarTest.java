@@ -37,4 +37,14 @@ class RadarTest {
         verify(batteryMock, Mockito.times(rocketCount)).launchPatriot(enemyMissle);
     }
 
+    @RepeatedTest(100)
+    void launchPatriot100TimesWhenNoticesAScudMissle() {
+        Executor executor = Runnable::run;
+        int rocketCount = 100;
+        BetterRadar radar = new BetterRadar(batteryMock,executor,rocketCount);
+        Scud enemyMissle = new Scud();
+        radar.notice(enemyMissle);
+        verify(batteryMock, Mockito.times(rocketCount)).launchPatriot(enemyMissle);
+    }
+
 }
